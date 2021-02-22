@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/foret_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- 홈 -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.project.foret.ui.main.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_foretFragment"
+            app:destination="@id/foretFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_foretBoardFragment"
+            app:destination="@id/boardFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
+
+    <!-- 익명게시판 -->
+    <fragment
+        android:id="@+id/anonymousForumFragment"
+        android:name="com.project.foret.ui.main.annoymousForum.AnonymousForumFragment"
+        android:label="AnonymousForumFragment"
+        tools:layout="@layout/fragment_anonymousforum" >
+        <action
+            android:id="@+id/action_anonymousForumFragment_to_boardFragment"
+            app:destination="@id/boardFragment" />
+        <action
+            android:id="@+id/action_anonymousForumFragment_to_createBoardActivity"
+            app:destination="@id/createBoardActivity" />
+    </fragment>
+
+    <!-- 검색 -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.project.foret.ui.main.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_foretFragment"
+            app:destination="@id/foretFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_searchFragment_to_createForetActivity"
+            app:destination="@id/createForetActivity" />
+    </fragment>
+
+    <!-- 채팅 -->
+    <fragment
+        android:id="@+id/chattingFragment"
+        android:name="com.project.foret.ui.main.chat.ChattingFragment"
+        android:label="ChattingFragment"
+        tools:layout="@layout/fragment_chatting" />
+
+    <!-- 알람 -->
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.project.foret.ui.main.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/foretFragment"
+        android:name="com.project.foret.ui.main.foret.ForetFragment"
+        android:label="ForetFragment"
+        tools:layout="@layout/fragment_foret" >
+        <action
+            android:id="@+id/action_foretFragment_to_boardFragment"
+            app:destination="@id/boardFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="foretId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_foretFragment_to_createBoardActivity"
+            app:destination="@id/createBoardActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="com.project.foret.ui.main.board.BoardFragment"
+        android:label="boardFragment"
+        tools:layout="@layout/fragment_board">
+        <argument
+            android:name="boardId"
+            app:argType="long" />
+    </fragment>
+
+    <activity
+        android:id="@+id/createForetActivity"
+        android:name="com.project.foret.ui.main.foret.CreateForetActivity"
+        android:label="activity_create_foret"
+        tools:layout="@layout/activity_create_foret" />
+    <activity
+        android:id="@+id/createBoardActivity"
+        android:name="com.project.foret.ui.main.board.CreateBoardActivity"
+        android:label="CreateBoardActivity"
+        tools:layout="@layout/activity_create_board"/>
+
+</navigation>
