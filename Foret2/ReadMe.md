@@ -6,7 +6,7 @@
 - kotlin
 
 ## 참조
-**[Foret APP](https://github.com/azqazq195/Project/blob/master/Project_Foret_APP/README.md)**
+**[Foret APP](https://github.com/azqazq195/Project/blob/master/Foret)**
 
 ## 구현 기능
 - 로그인 및 회원가입
