@@ -35,7 +35,7 @@
 | 사용 언어 | java, sql |
 
 ### VER 2.0
-| 기존 | 현재 |
+| 기존 | 변경 점 |
 |--|--|
 |STS3|Srping Boot|
 |Android Studio Java|Android Studio Kotlin| 
