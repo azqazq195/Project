@@ -1,8 +1,10 @@
 package com.project.vllo.ui
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.project.vllo.EditActivity
+import com.project.vllo.MainActivity
 import com.project.vllo.utils.GetFilesFromGallery
 import com.project.vllo.R
 import com.project.vllo.adapter.*
@@ -24,6 +28,7 @@ import com.project.vllo.adapter.GalleryAdapter.ItemListener
 import com.project.vllo.model.Item
 import com.project.vllo.utils.Constants
 import com.project.vllo.utils.snackBar
+import java.io.Serializable
 
 
 class AddFragment : Fragment() {
@@ -185,8 +190,14 @@ class AddFragment : Fragment() {
 
     private fun setOnClickListener(view: View) {
         btnNext.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_addFragment_to_addSettingFragment)
+            val intent = Intent(requireContext(), EditActivity::class.java)
+            val test = selectedList as ArrayList<Item>
+            Log.e("TAG",  test.toString())
+            intent.putExtra("selectedList", test)
+            startActivity(intent)
+            activity?.finish()
+//            Navigation.findNavController(view)
+//                .navigate(R.id.action_addFragment_to_addSettingFragment)
         }
         tvAll.setOnClickListener {
             textViewClicked(tvAll)
