@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.project.vllo.R
@@ -30,6 +31,7 @@ class SelectedAdapter(
         val item = itemList[position]
         val ivImage = holder.itemView.findViewById<ImageView>(R.id.ivImage)
         val tvInfo = holder.itemView.findViewById<TextView>(R.id.tvInfo)
+        val cvDelete = holder.itemView.findViewById<CardView>(R.id.cvDelete)
 
         when (item.mimeType) {
             "image/gif" -> {
@@ -47,18 +49,19 @@ class SelectedAdapter(
                 tvInfo.text = String.format("%02d:%02d", minute, second)
             }
             else -> {
+                tvInfo.visibility = View.GONE
                 Glide.with(context).load(item.uri).into(ivImage)
             }
         }
 
-        holder.itemView.setOnClickListener {
-            itemListener.onItemClick(item)
+        cvDelete.setOnClickListener {
+            itemListener.onItemClick(item, position)
         }
     }
 
     override fun getItemCount() = itemList.size
 
     interface ItemListener {
-        fun onItemClick(item: Item)
+        fun onItemClick(item: Item, position: Int)
     }
 }

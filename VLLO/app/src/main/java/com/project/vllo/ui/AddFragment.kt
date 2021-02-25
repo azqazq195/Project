@@ -38,11 +38,9 @@ class AddFragment : Fragment() {
     private lateinit var tvArray: Array<TextView>
     private lateinit var rvGallery: RecyclerView
     private lateinit var rvSelected: RecyclerView
-    private lateinit var imageAdapter: ImageAdapter
     private lateinit var galleryAdapter: GalleryAdapter
     private lateinit var selectedAdapter: SelectedAdapter
 
-    private lateinit var imageList: ArrayList<String>
     private lateinit var itemList: MutableList<Item>
     private lateinit var selectedList: MutableList<Item>
 
@@ -76,39 +74,46 @@ class AddFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        imageList = GetFilesFromGallery().listOfAll(requireContext())
-        imageAdapter = ImageAdapter(requireContext(), imageList, object : ImageListener {
-            override fun onImageClick(path: String) {
-                layoutRoot.snackBar(path)
+        itemList = GetFilesFromGallery().listOfPhoto(requireContext())
+        galleryAdapter = GalleryAdapter(requireContext(), itemList, object : ItemListener {
+            override fun onItemClick(item: Item) {
+                selectedList.add(item)
+                selectedAdapter.notifyDataSetChanged()
+                rvSelected.smoothScrollToPosition(selectedList.size - 1)
             }
         })
         rvGallery.apply {
             setHasFixedSize(true)
             layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = imageAdapter
+            adapter = galleryAdapter
         }
 
         selectedList = mutableListOf()
-        selectedAdapter = SelectedAdapter(requireContext(), selectedList, object : SelectedAdapter.ItemListener{
-            override fun onItemClick(item: Item) {
-                layoutRoot.snackBar(item.uri.toString())
-            }
-        })
+        selectedAdapter =
+            SelectedAdapter(requireContext(), selectedList, object : SelectedAdapter.ItemListener {
+                override fun onItemClick(item: Item, position: Int) {
+                    selectedList.removeAt(position)
+                    selectedAdapter.notifyDataSetChanged()
+                }
+            })
         rvSelected.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = selectedAdapter
         }
     }
 
     private fun loadAll() {
-        imageList = GetFilesFromGallery().listOfAll(requireContext())
-        imageAdapter = ImageAdapter(requireContext(), imageList, object : ImageListener {
-            override fun onImageClick(path: String) {
-                layoutRoot.snackBar(path)
+        itemList = GetFilesFromGallery().listOfPhoto(requireContext())
+        galleryAdapter = GalleryAdapter(requireContext(), itemList, object : ItemListener {
+            override fun onItemClick(item: Item) {
+                selectedList.add(item)
+                selectedAdapter.notifyDataSetChanged()
+                rvSelected.smoothScrollToPosition(selectedList.size - 1)
             }
         })
-        rvGallery.adapter = imageAdapter
+        rvGallery.adapter = galleryAdapter
     }
 
     private fun loadVideo() {
@@ -117,7 +122,7 @@ class AddFragment : Fragment() {
             override fun onItemClick(item: Item) {
                 selectedList.add(item)
                 selectedAdapter.notifyDataSetChanged()
-                rvSelected.smoothScrollToPosition(selectedList.size-1)
+                rvSelected.smoothScrollToPosition(selectedList.size - 1)
             }
         })
         rvGallery.adapter = galleryAdapter
@@ -129,6 +134,7 @@ class AddFragment : Fragment() {
             override fun onItemClick(item: Item) {
                 selectedList.add(item)
                 selectedAdapter.notifyDataSetChanged()
+                rvSelected.smoothScrollToPosition(selectedList.size - 1)
             }
         })
         rvGallery.adapter = galleryAdapter
@@ -140,6 +146,7 @@ class AddFragment : Fragment() {
             override fun onItemClick(item: Item) {
                 selectedList.add(item)
                 selectedAdapter.notifyDataSetChanged()
+                rvSelected.smoothScrollToPosition(selectedList.size - 1)
             }
         })
         rvGallery.adapter = galleryAdapter
