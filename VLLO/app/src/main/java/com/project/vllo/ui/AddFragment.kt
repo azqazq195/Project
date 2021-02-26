@@ -74,6 +74,9 @@ class AddFragment : Fragment() {
         } else {
             setRecyclerView()
             setOnClickListener(view)
+            
+            // 임시
+            loadVideo()
         }
         return view
     }

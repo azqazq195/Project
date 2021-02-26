@@ -1,38 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background_black"
-    tools:context=".EditActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="edit"
+            type="com.project.vllo.EditActivity" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:padding="16dp">
+        android:background="@color/background_black"
+        android:orientation="vertical">
 
         <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/playerView"
+            android:id="@+id/video_loader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:padding="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_video_start_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </com.google.android.exoplayer2.ui.PlayerView>
+
+        <ImageView
+            android:id="@+id/btn_video_play"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/play"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            android:onClick="@{() -> edit.playVideo()}"
+            app:layout_constraintBottom_toBottomOf="@+id/video_loader"
+            app:layout_constraintStart_toStartOf="@+id/video_loader" />
+
+        <ImageView
+            android:id="@+id/btn_video_pause"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pause"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="invisible"
+            android:onClick="@{() -> edit.pauseVideo()}"
+            app:layout_constraintBottom_toBottomOf="@+id/video_loader"
+            app:layout_constraintStart_toStartOf="@+id/video_loader" />
+
+        <ImageView
+            android:id="@+id/btn_video_previous"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/previous"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="@{() -> edit.previousVideo()}"
+            app:layout_constraintBottom_toTopOf="@+id/btn_video_pause"
+            app:layout_constraintStart_toStartOf="@+id/video_loader" />
+
+        <ImageView
+            android:id="@+id/btn_video_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/next"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="@{() -> edit.nextVideo()}"
+            app:layout_constraintBottom_toTopOf="@+id/btn_video_pause"
+            app:layout_constraintEnd_toEndOf="@+id/video_loader" />
+
+        <TextView
+            android:id="@+id/tv_video_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/video_loader" />
+
+        <TextView
+            android:id="@+id/tv_video_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/video_loader" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:max="1000"
+            android:progressDrawable="@android:color/transparent"
+            android:secondaryProgress="0"
+            app:layout_constraintBottom_toBottomOf="@+id/video_edit_scroll_view"
+            app:layout_constraintEnd_toEndOf="@+id/video_edit_scroll_view"
+            app:layout_constraintStart_toStartOf="@+id/video_edit_scroll_view" />
+
+        <HorizontalScrollView
+            android:id="@+id/video_edit_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:layout_marginBottom="200dp"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@id/tv_video_end_time"
+            app:layout_constraintVertical_bias="0.26999998">
 
-    <TextView
-        android:id="@+id/tvTemp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:textSize="24sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:text="Edit UI" />
-</LinearLayout>
+            <FrameLayout
+                android:id="@+id/video_edit_child_frame_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/border_round_trans">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/video_edit_recycler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:adjustViewBounds="true"
+                    android:orientation="horizontal" />
+
+                <View
+                    android:id="@+id/selected_time_line_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_round"
+                    android:visibility="invisible" />
+            </FrameLayout>
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

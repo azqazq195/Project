@@ -2,6 +2,7 @@ package com.project.vllo.utils
 
 import android.content.Context
 import android.util.AttributeSet
+import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 
 
@@ -50,3 +51,4 @@ class SquareHeightConstraintLayout : ConstraintLayout {
         super.onMeasure(heightMeasureSpec, heightMeasureSpec)
     }
 }
+

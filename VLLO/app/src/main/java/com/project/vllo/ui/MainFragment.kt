@@ -24,6 +24,7 @@ class MainFragment : Fragment() {
         setFindViewById(view)
         setOnClickListener(view)
 
+        // 임시
         return view
     }
 

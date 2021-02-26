@@ -1,28 +1,26 @@
 package com.project.vllo
 
-import androidx.appcompat.app.AppCompatActivity
+import android.media.*
 import android.os.Bundle
 import android.util.Log
-import android.widget.MediaController
-import android.widget.VideoView
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.ExoPlayerFactory
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.MediaSourceFactory
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection
-import com.google.android.exoplayer2.ui.PlayerView
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
+import com.project.vllo.databinding.ActivityEditBinding
 import com.project.vllo.model.Item
+import com.project.vllo.utils.TrimVideoUtils
+
 
 class EditActivity : AppCompatActivity() {
 
     val TAG = "EditActivity"
 
-    private lateinit var playerView: PlayerView
+    private lateinit var binding: ActivityEditBinding
 
     private lateinit var itemList: ArrayList<Item>
+    private var mDuration : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,22 +29,63 @@ class EditActivity : AppCompatActivity() {
         // 없으면 안댐 addFragment 에서 넘어올때 null 체크 필수
         itemList = intent.getParcelableArrayListExtra<Item>("selectedList")!!
 
-        setFindViewById()
+        setUpDataBinding()
+        initView()
+        prepareVideo()
 
-        val player = SimpleExoPlayer.Builder(this).build()
-        playerView.player = player
+        setVideoDuration()
+    }
 
-        // val mediaItem = MediaItem.fromUri(itemList[0].uri)
-        // player.setMediaItem(mediaItem)
-        // player.prepare()
+    private fun setUpDataBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit)
+        binding.edit = this@EditActivity
+    }
 
-        for(i in itemList){
-            player.addMediaItem(MediaItem.fromUri(i.uri))
+    private fun initView() {
+        binding.seekBar.apply {
+            progress = binding.seekBar.max/2
+            isEnabled = false
         }
-        player.prepare()
     }
 
-    private fun setFindViewById() {
-        playerView = findViewById(R.id.playerView)
+    private fun prepareVideo() {
+        val player = SimpleExoPlayer.Builder(this).build()
+        val mediaItem = MediaItem.fromUri(itemList[0].uri)
+        player.apply {
+            setMediaItem(mediaItem)
+            prepare()
+        }
+        binding.videoLoader.apply {
+            hideController()
+            useController = false
+            setPlayer(player)
+        }
+        binding.tvVideoStartTime.text =
+            String.format("%s", TrimVideoUtils.stringForTime(player.currentPosition.toFloat()))
+        mDuration = itemList[0].duration!!
     }
+
+    private fun setVideoDuration() {
+        binding.tvVideoEndTime.text = String.format("%s",TrimVideoUtils.stringForTime(mDuration.toFloat()))
+    }
+
+    fun playVideo() {
+        binding.btnVideoPause.visibility = View.VISIBLE
+        binding.btnVideoPlay.visibility = View.INVISIBLE
+        binding.videoLoader.player?.play()
+    }
+    fun pauseVideo() {
+        binding.btnVideoPause.visibility = View.INVISIBLE
+        binding.btnVideoPlay.visibility = View.VISIBLE
+        binding.videoLoader.player?.pause()
+    }
+
+     fun previousVideo(){
+         binding.videoLoader.player?.seekTo(0)
+         pauseVideo()
+     }
+     fun nextVideo(){
+         binding.videoLoader.player?.seekTo(itemList[0].duration!!.toLong())
+         pauseVideo()
+     }
 }
