@@ -9,7 +9,6 @@
 - Java
 - Spring STS3
 - Oracle
-- AWS
 
 ## [Foret APP VER 2.0](https://github.com/azqazq195/Project/tree/master/Foret2)
 온라인 스터디 모임 어플
