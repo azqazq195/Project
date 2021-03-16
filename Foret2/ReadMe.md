@@ -26,13 +26,6 @@
 - Firebase 활용 푸쉬 알림, 채팅
 
 ## Development environment
-### VER 1.0
-| 종류 | 이름  |
-|--|--|
-| 개발 툴 | STS3, Android Studio, sql developer, firebase, postman |
-| 버전 관리 | GitHub |
-| 데이터베이스| Oracle |
-| 사용 언어 | java, sql |
 
 ### VER 2.0
 | 기존 | 변경 점 |
