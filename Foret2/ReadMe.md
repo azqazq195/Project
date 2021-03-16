@@ -28,9 +28,11 @@
 ## Development environment
 
 ### VER 2.0
-| 기존 | 변경 점 |
-|--|--|
-|STS3|Srping Boot|
-|Android Studio Java|Android Studio Kotlin| 
-|Oracle|MariaDB|
+| 종류 | 기존 | 변경 점 |
+|--|--|--|
+| 개발 툴 |STS3|Srping Boot|
+| 데이터베이스|Oracle|MariaDB|
+| 사용 언어 | java | kotlin |
+
+- 외 JPA, MVVM 사용 등
 
