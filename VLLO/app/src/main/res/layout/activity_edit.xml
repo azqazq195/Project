@@ -7,7 +7,7 @@
 
         <variable
             name="edit"
-            type="com.project.vllo.EditActivity" />
+            type="com.project.vllo.edit.EditActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,28 +54,6 @@
             app:layout_constraintBottom_toBottomOf="@+id/video_loader"
             app:layout_constraintStart_toStartOf="@+id/video_loader" />
 
-        <ImageView
-            android:id="@+id/btn_video_previous"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/previous"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="@{() -> edit.previousVideo()}"
-            app:layout_constraintBottom_toTopOf="@+id/btn_video_pause"
-            app:layout_constraintStart_toStartOf="@+id/video_loader" />
-
-        <ImageView
-            android:id="@+id/btn_video_next"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/next"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="@{() -> edit.nextVideo()}"
-            app:layout_constraintBottom_toTopOf="@+id/btn_video_pause"
-            app:layout_constraintEnd_toEndOf="@+id/video_loader" />
-
         <TextView
             android:id="@+id/tv_video_start_time"
             android:layout_width="wrap_content"
@@ -83,6 +61,7 @@
             android:text="TextView"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/video_loader" />
 
         <TextView
@@ -94,23 +73,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/video_loader" />
 
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
-            android:max="1000"
-            android:progressDrawable="@android:color/transparent"
-            android:secondaryProgress="0"
-            app:layout_constraintBottom_toBottomOf="@+id/video_edit_scroll_view"
-            app:layout_constraintEnd_toEndOf="@+id/video_edit_scroll_view"
-            app:layout_constraintStart_toStartOf="@+id/video_edit_scroll_view" />
-
         <HorizontalScrollView
             android:id="@+id/video_edit_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="200dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="100dp"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,9 +92,9 @@
                 android:background="@drawable/border_round_trans">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/video_edit_recycler"
+                    android:id="@+id/rv_video_thumbnail"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="80dp"
                     android:adjustViewBounds="true"
                     android:orientation="horizontal" />
 
@@ -139,6 +106,75 @@
                     android:visibility="invisible" />
             </FrameLayout>
         </HorizontalScrollView>
+
+        <ImageView
+            android:id="@+id/btn_video_previous"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/previous"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:background="@color/black"
+            android:onClick="@{() -> edit.previousVideo()}"
+            app:layout_constraintTop_toTopOf="@+id/video_edit_scroll_view"
+            app:layout_constraintStart_toStartOf="@+id/video_edit_scroll_view" />
+
+        <ImageView
+            android:id="@+id/btn_video_previous2"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:src="@drawable/previous"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/btn_video_previous"
+            app:layout_constraintStart_toStartOf="@+id/video_edit_scroll_view" />
+
+        <ImageView
+            android:id="@+id/btn_video_next"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/next"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:onClick="@{() -> edit.nextVideo()}"
+            android:background="@color/black"
+            app:layout_constraintTop_toTopOf="@+id/video_edit_scroll_view"
+            app:layout_constraintEnd_toEndOf="@+id/video_edit_scroll_view" />
+
+        <ImageView
+            android:id="@+id/btn_video_next2"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:src="@drawable/next"
+            android:padding="6dp"
+            android:scaleType="centerInside"
+            android:onClick="@{() -> edit.nextVideo()}"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/btn_video_next"
+            app:layout_constraintEnd_toEndOf="@+id/video_edit_scroll_view" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:max="1000"
+            android:progressDrawable="@android:color/transparent"
+            android:secondaryProgress="0"
+            android:splitTrack="false"
+            android:background="@drawable/seekbar_line"
+            app:layout_constraintTop_toTopOf="@+id/video_edit_scroll_view"
+            app:layout_constraintBottom_toBottomOf="@+id/video_edit_scroll_view"
+            app:layout_constraintEnd_toEndOf="@+id/video_edit_scroll_view"
+            app:layout_constraintStart_toStartOf="@+id/video_edit_scroll_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

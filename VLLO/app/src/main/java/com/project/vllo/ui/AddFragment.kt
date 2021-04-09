@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,21 +13,17 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.project.vllo.EditActivity
-import com.project.vllo.MainActivity
+import com.project.vllo.edit.EditActivity
 import com.project.vllo.utils.GetFilesFromGallery
 import com.project.vllo.R
 import com.project.vllo.adapter.*
-import com.project.vllo.adapter.ImageAdapter.ImageListener
 import com.project.vllo.adapter.GalleryAdapter.ItemListener
 import com.project.vllo.model.Item
 import com.project.vllo.utils.Constants
 import com.project.vllo.utils.snackBar
-import java.io.Serializable
 
 
 class AddFragment : Fragment() {
@@ -195,7 +190,6 @@ class AddFragment : Fragment() {
         btnNext.setOnClickListener {
             val intent = Intent(requireContext(), EditActivity::class.java)
             val test = selectedList as ArrayList<Item>
-            Log.e("TAG",  test.toString())
             intent.putExtra("selectedList", test)
             startActivity(intent)
             activity?.finish()
