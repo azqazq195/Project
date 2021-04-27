@@ -21,7 +21,7 @@
 실시간 가사 표시 및 네비게이팅 음악 어플
 - Kotlin
 
-### [Foret APP VER 2.0](https://github.com/azqazq195/Project/tree/master/Foret2)
+### [Python Server](https://github.com/azqazq195/Project/tree/master/Django)
 파이썬 장고를 사용한 간단 구매
 - Python
 - Django
