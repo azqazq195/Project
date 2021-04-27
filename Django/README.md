@@ -1,4 +1,4 @@
-# Project_Brandi
+# Project_Django
 
 간단 회원, 상품, 주문내역
 
