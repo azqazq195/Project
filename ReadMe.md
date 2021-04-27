@@ -13,8 +13,9 @@
 - MariaDB
 - AWS
 
+---
 
-# 연습 프로젝트
+### 연습 프로젝트
 
 ### [FLO](https://github.com/azqazq195/Project/tree/master/FLO)
 실시간 가사 표시 및 네비게이팅 음악 어플
