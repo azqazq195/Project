@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), LyricsAdapter.OnItemClickListener {
     private lateinit var animInBottom: Animation
     private lateinit var animOutBottom: Animation
 
-    private val TAG = "뭐씨발"
+    private val TAG = "[TEST]"
 
     private val lyricsList = ArrayList<Lyrics>()
 
