@@ -1,0 +1,13 @@
+
+spring:
+  datasource:
+    url: jdbc:mariadb://localhost:3306/Jenkins
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: qwe123
+  jpa:
+    open-in-view: true
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update

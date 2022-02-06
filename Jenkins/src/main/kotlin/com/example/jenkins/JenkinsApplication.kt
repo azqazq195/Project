@@ -1,4 +1,4 @@
-package com.example.Jenkins
+package com.example.jenkins
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
